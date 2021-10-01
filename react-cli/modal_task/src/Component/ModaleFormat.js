@@ -8,13 +8,19 @@ import ModaleCheckBox from './ModaleCheckBox'
 import ModaleDarkButton from './ModaleDarkButton'
 
 class ModaleFormat extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      Parentvalue: this.props.Childvalue
+      value:true,      // initialized a value to be accessed and passed to ModaleTextBody
+      valued:""
     }
+    this.getValueFromChild = this.getValueFromChild.bind(this)
   }
+  
+    getValueFromChild(e){         // Declared a function to get value from child
+      this.setState({value:e})    // Setting state value to e 
+    }
+
   render() {
     return (
       <>
@@ -27,7 +33,7 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label1" label="Material Type:" />
             </div>
             <div className="col-md-9">
-              <ModaleSelectBody access={true} id="Label1" materialType="Select Material Type" />
+              <ModaleSelectBody access={this.state.value} id="Label1" materialType="Select Material Type" />
             </div>
             <div className="col-md-1">
               <ModaleDarkButton class="btn btn-dark" />
@@ -41,7 +47,7 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label2" label="Part Name:" />
             </div>
             <div className="col-md-10">
-              <ModaleTextBody id="Label2" access={true} />
+              <ModaleTextBody id="Label2" access={this.state.value} inputValue={this.state.valued} />
             </div>
           </div>
 
@@ -52,7 +58,7 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label3" label="Part No:" />
             </div>
             <div className="col-md-8">
-              <ModaleTextBody id="Label3" access={true} />
+              <ModaleTextBody id="Label3" access={this.state.value} />
             </div>
             <div className="col-md-2">
               <ModaleCheckBox id="Label4" />&nbsp;
@@ -67,7 +73,7 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label5" label="PPC Name:" />
             </div>
             <div className="col-md-10">
-              <ModaleTextBody id="Label5" access={true} />
+              <ModaleTextBody id="Label5" access={this.state.value} />
             </div>
           </div>
 
@@ -78,7 +84,7 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label6" label="Description:" />
             </div>
             <div className="col-md-6">
-              <ModaleTextBody id="Label6" access={true} />
+              <ModaleTextBody id="Label6" access={this.state.value} />
             </div>
             <div className="col-md-4">
               <div className="row">
@@ -86,7 +92,7 @@ class ModaleFormat extends React.Component {
                   <ModaleLabel id="Label7" label="Unit:" />
                 </div>
                 <div className="col-md-9">
-                  <ModaleSelectBody access={true} id="Label7" materialType="Select Unit" />
+                  <ModaleSelectBody access={this.state.value} id="Label7" materialType="Select Unit" />
                 </div>
               </div>
             </div>
@@ -99,13 +105,13 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label8" label="Stock Location:" />
             </div>
             <div className="col-md-4">
-              <ModaleTextBody id="Label8" label="Stock Location:" access={true} />
+              <ModaleTextBody id="Label8" label="Stock Location:" access={this.state.value} />
             </div>
             <div className="col-md-2" id="label09">
               <ModaleLabel id="Label9" label="Cons Unit:" />
             </div>
             <div className="col-md-4">
-              <ModaleSelectBody access={true} id="Label9" materialType="Select ConsUnit:" />
+              <ModaleSelectBody access={this.state.value} id="Label9" materialType="Select ConsUnit:" />
             </div>
           </div>
 
@@ -116,13 +122,13 @@ class ModaleFormat extends React.Component {
               <ModaleLabel id="Label10" label="HSN Code:" />
             </div>
             <div className="col-md-4">
-              <ModaleTextBody id="Label10" access={true} />
+              <ModaleTextBody id="Label10" access={this.state.value} />
             </div>
             <div className="col-md-2" id="label011">
               <ModaleLabel id="Label11" label="Tax %:" />
             </div>
             <div className="col-md-4">
-              <ModaleTextBody id="Label11" access={true} />
+              <ModaleTextBody id="Label11" access={this.state.value} />
             </div>
           </div>
 
@@ -130,22 +136,22 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleButton title="Add" access={false} />
+               <ModaleButton title={this.state.value ? "Add" : "Remove"} access={false} fun={this.getValueFromChild}  class="btn btn-primary"/>   {/* Passed an function as a props and toggling text of button */}
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Edit" access={false} />
+              <ModaleButton title="Edit" access={false} class="btn btn-success" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Save" access={false} />
+              <ModaleButton title="Save" access={true}  class="btn btn-success" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="FIND" access={false} />
+              <ModaleButton title="Find" access={false}  class="btn btn-info" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Delete" access={false} />
+              <ModaleButton title="Delete" access={false}  class="btn btn-danger" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Exit" access={false} />
+              <ModaleButton title="Exit" access={false}  class="btn btn-warning" />
             </div>
           </div>
         </form>

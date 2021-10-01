@@ -9,10 +9,10 @@ class ModaleFooterComponent extends React.Component {
   render() {
     return (
       <div className="row mb-3">
-          <div className="col-md-6">
+          <div className="col">
             <ModaleFooterButton title="Previous" />
           </div>
-          <div className="col-md-6" style={{textAlign:"right"}}>
+          <div className="col" style={{textAlign:"right"}}>
             <ModaleFooterButton title="Next" click={this.callAxios}/>
           </div>
       </div>
