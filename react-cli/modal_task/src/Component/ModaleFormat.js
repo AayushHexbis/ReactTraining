@@ -1,25 +1,24 @@
 import React from 'react'
 import "./CSS/Modale.css"
-import ModaleSelectBody from './ModaleSelectBody'
-import ModaleTextBody from './ModaleTextBody'
-import ModaleLabel from './ModaleLabel'
+import ModaleSelectBody from './ModaleInputComponents/ModaleSelectBody'
+import ModaleTextBody from './ModaleInputComponents/ModaleTextBody'
+import ModaleLabel from './ModaleInputComponents/ModaleLabel'
 import ModaleButton from './ModaleButton'
-import ModaleCheckBox from './ModaleCheckBox'
+import ModaleCheckBox from './ModaleInputComponents/ModaleCheckBox'
 import ModaleDarkButton from './ModaleDarkButton'
 
 class ModaleFormat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value:true,      // initialized a value to be accessed and passed to ModaleTextBody
-      valued:""
+      value: true,      // initialized a value to be accessed and passed to ModaleTextBody
     }
     this.getValueFromChild = this.getValueFromChild.bind(this)
   }
-  
-    getValueFromChild(e){         // Declared a function to get value from child
-      this.setState({value:e})    // Setting state value to e 
-    }
+
+  getValueFromChild(e) {         // Declared a function to get value from child
+    this.setState({ value: e })    // Setting state value to e 
+  }
 
   render() {
     return (
@@ -30,7 +29,7 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label1" label="Material Type:" />
+              <ModaleLabel name="Label1" label="Material Type:" />
             </div>
             <div className="col-md-9">
               <ModaleSelectBody access={this.state.value} id="Label1" materialType="Select Material Type" />
@@ -44,10 +43,11 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label2" label="Part Name:" />
+              <ModaleLabel name="Label2" label="Part Name:" />
             </div>
             <div className="col-md-10">
-              <ModaleTextBody id="Label2" access={this.state.value} inputValue={this.state.valued} />
+              <ModaleTextBody id="Label2" access={this.state.value} />
+
             </div>
           </div>
 
@@ -55,14 +55,14 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label3" label="Part No:" />
+              <ModaleLabel name="Label3" label="Part No:" />
             </div>
             <div className="col-md-8">
               <ModaleTextBody id="Label3" access={this.state.value} />
             </div>
             <div className="col-md-2">
               <ModaleCheckBox id="Label4" />&nbsp;
-              <ModaleLabel id="Label4" label="Allow Bom" />
+              <ModaleLabel name="Label4" label="Allow Bom" />
             </div>
           </div>
 
@@ -70,7 +70,7 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label5" label="PPC Name:" />
+              <ModaleLabel name="Label5" label="PPC Name:" />
             </div>
             <div className="col-md-10">
               <ModaleTextBody id="Label5" access={this.state.value} />
@@ -81,7 +81,7 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label6" label="Description:" />
+              <ModaleLabel name="Label6" label="Description:" />
             </div>
             <div className="col-md-6">
               <ModaleTextBody id="Label6" access={this.state.value} />
@@ -89,7 +89,7 @@ class ModaleFormat extends React.Component {
             <div className="col-md-4">
               <div className="row">
                 <div className="col-md-3">
-                  <ModaleLabel id="Label7" label="Unit:" />
+                  <ModaleLabel name="Label7" label="Unit:" />
                 </div>
                 <div className="col-md-9">
                   <ModaleSelectBody access={this.state.value} id="Label7" materialType="Select Unit" />
@@ -102,13 +102,13 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label8" label="Stock Location:" />
+              <ModaleLabel name="Label8" label="Stock Location:" />
             </div>
             <div className="col-md-4">
               <ModaleTextBody id="Label8" label="Stock Location:" access={this.state.value} />
             </div>
             <div className="col-md-2" id="label09">
-              <ModaleLabel id="Label9" label="Cons Unit:" />
+              <ModaleLabel name="Label9" label="Cons Unit:" />
             </div>
             <div className="col-md-4">
               <ModaleSelectBody access={this.state.value} id="Label9" materialType="Select ConsUnit:" />
@@ -119,13 +119,13 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-              <ModaleLabel id="Label10" label="HSN Code:" />
+              <ModaleLabel name="Label10" label="HSN Code:" />
             </div>
             <div className="col-md-4">
               <ModaleTextBody id="Label10" access={this.state.value} />
             </div>
             <div className="col-md-2" id="label011">
-              <ModaleLabel id="Label11" label="Tax %:" />
+              <ModaleLabel name="Label11" label="Tax %:" />
             </div>
             <div className="col-md-4">
               <ModaleTextBody id="Label11" access={this.state.value} />
@@ -136,22 +136,22 @@ class ModaleFormat extends React.Component {
 
           <div className="row mb-3">
             <div className="col-md-2">
-               <ModaleButton title={this.state.value ? "Add" : "Remove"} access={false} fun={this.getValueFromChild}  class="btn btn-primary"/>   {/* Passed an function as a props and toggling text of button */}
+              <ModaleButton title={this.state.value ? "Add" : "Remove"} access={false} fun={this.getValueFromChild} class="btn btn-primary" />   {/* Passed an function as a props and toggling text of button */}
             </div>
             <div className="col-md-2">
               <ModaleButton title="Edit" access={false} class="btn btn-success" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Save" access={true}  class="btn btn-success" />
+              <ModaleButton title="Save" access={true} class="btn btn-success" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Find" access={false}  class="btn btn-info" />
+              <ModaleButton title="Find" access={false} class="btn btn-info" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Delete" access={false}  class="btn btn-danger" />
+              <ModaleButton title="Delete" access={false} class="btn btn-danger" />
             </div>
             <div className="col-md-2">
-              <ModaleButton title="Exit" access={false}  class="btn btn-warning" />
+              <ModaleButton title="Exit" access={false} class="btn btn-warning" />
             </div>
           </div>
         </form>

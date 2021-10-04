@@ -1,5 +1,5 @@
 import React from 'react'
-import './CSS/Modale.css'
+import '../CSS/Modale.css'
 class ModaleSelectBody extends React.Component {
   render() {
     return (

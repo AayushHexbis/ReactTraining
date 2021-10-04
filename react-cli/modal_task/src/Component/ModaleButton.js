@@ -5,6 +5,7 @@ class ModaleButton extends React.Component {
     super(props);
     this.state = {
       change: this.props.access,
+      inputValue: this.props.input
     }
     this.handleAddButton = this.handleAddButton.bind(this);
     this.handleEditButton = this.handleEditButton.bind(this);
@@ -14,8 +15,8 @@ class ModaleButton extends React.Component {
     this.handleExitButton = this.handleExitButton.bind(this);
   }
   handleAddButton() {
-    this.setState({ change: !this.state.change, rem:this.state })
-    this.props.fun(this.state.change)       // Passing (Props/Params) from child to Parent
+    this.setState({ change: !this.state.change, rem: this.state })
+    this.props.fun(this.state.change, this.state.inputValue)       // Passing (Props/Params) from child to Parent
     // console.log(this.state.change)
   }
 
@@ -49,6 +50,9 @@ class ModaleButton extends React.Component {
       <button onClick={() => {
         if (this.props.title === "Add" || this.props.title === "Remove") {
           this.handleAddButton();
+          // if (this.props.access===false){
+          //   console.log(document.getElementById("Label2").innerHTML)
+          // }
           // console.log("You Clicked on Add")
         }
         else if (this.props.title === "Edit") {
