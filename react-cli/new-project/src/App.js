@@ -11,6 +11,7 @@ import AxiosGet from "./Components/AxiosGet"
 import Callback from "./Components/Callback"
 import Toggle from "./Components/Toggle"
 import Bakery from "./Components/Bakery"
+import TestComponent , {TestComponent1,firstName,lastName} from './Components/TestComponent'
 
 
 const myFun = () => {
@@ -26,7 +27,7 @@ const myFun = () => {
 function App() {
   return (
     <>
-    <Navbar />
+    {/* <Navbar /> */}
     {/* <Form /> */}
     {/* <Axios /> */}
     {/* <Footer /> */}
@@ -35,8 +36,14 @@ function App() {
     {/* <AxiosPost/> */}
     {/* <AxiosGet/> */}
     {/* <Callback pro={myFun}/> */}
-    <Bakery/>
+    {/* <Bakery/> */}
     {/* <Toggle /> */}
+    <ol>
+      <li>{TestComponent}</li>
+      <li>{TestComponent1}</li>
+      <li>{firstName()}</li>
+      <li>{lastName()}</li>
+    </ol>
     </>
   );
 }
