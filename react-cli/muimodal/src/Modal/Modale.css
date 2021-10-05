@@ -1,0 +1,26 @@
+#clci{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+@media (min-width: 576px)
+{
+  #myid{
+    max-width: 1000px;
+  }
+
+}
+
+#modal-footer{
+  display: block;
+}
+
+.InputLabel{
+line-height: 2.5 !important;
+}
+
+.MuiInputBase-input{
+border-style: none !important;
+}
