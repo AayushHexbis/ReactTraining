@@ -7,6 +7,7 @@ import ModaleButton from './ModaleButton'
 import ModaleCheckBox from './ModaleInputComponents/ModaleCheckBox'
 import ModaleDarkButton from './ModaleDarkButton'
 
+
 class ModaleFormat extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,13 @@ class ModaleFormat extends React.Component {
       value: true,      // initialized a value to be accessed and passed to ModaleTextBody
     }
     this.getValueFromChild = this.getValueFromChild.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+
+  }
+
+  handleChange(event) {
+    this.setState({ inputValue: event.target.value });
+    alert("Hello")
   }
 
   getValueFromChild(e) {         // Declared a function to get value from child
@@ -24,7 +32,6 @@ class ModaleFormat extends React.Component {
     return (
       <>
         <form action="">
-
           {/* Material Type Field */}
 
           <div className="row mb-3">
