@@ -12,22 +12,28 @@ class Modale extends React.Component {
     this.state = {
       show: false
     }
+    this.sendShow = this.sendShow.bind(this)
   }
 
   handleClick() {
     this.setState({ show: !this.state.show })
   }
+
+  sendShow(e){
+    this.setState({show: !e})
+  }
+
   render() {
     return (
       <>
         <Button onClick={() => this.handleClick()} id="clci">Click Me</Button>
-        <Modal show={this.state.show} onHide={() => this.handleClick()} id="myid">
+        <Modal show={this.state.show} onHide={() => this.handleClick() } backdrop="static" keyboard={false} id="myid">
 
           <Modal.Header closeButton>
             <ModaleHeader/>
           </Modal.Header>
           <Modal.Body>
-            <ModaleBody />
+            <ModaleBody fun={this.sendShow}/>
             {/* <ModaleTestInput/> */}
           </Modal.Body>
           <Modal.Footer id="modal-footer">

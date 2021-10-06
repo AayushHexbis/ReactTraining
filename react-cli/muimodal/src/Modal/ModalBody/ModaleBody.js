@@ -2,7 +2,6 @@ import React from 'react'
 import "../Modale.css"
 import { TextField, InputLabel, Select, MenuItem, Checkbox } from '@material-ui/core';
 
-
 class ModaleBody extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +17,8 @@ class ModaleBody extends React.Component {
       stockValue: "",
       consValue: 0,
       hsnValue: "",
-      taxValue: ""
+      taxValue: "",
+      exitShow: true
     }
     this.getValueFromChild = this.getValueFromChild.bind(this)
     this.handleChange = this.handleChange.bind(this);
@@ -34,9 +34,7 @@ class ModaleBody extends React.Component {
     this.setConsValue = this.setConsValue.bind(this);
     this.setHsnValue = this.setHsnValue.bind(this);
     this.setTaxValue = this.setTaxValue.bind(this);
-
-
-
+    this.handleExit = this.handleExit.bind(this);
   }
 
   handleChange(event) {
@@ -98,6 +96,10 @@ class ModaleBody extends React.Component {
   setTaxValue(e) {
     this.setState({ taxValue: e.target.value })
   }
+handleExit(e){
+  this.setState({exitShow: !this.state.exitShow})
+  this.props.fun(this.state.exitShow)
+}
 
   render() {
     return (
@@ -110,7 +112,7 @@ class ModaleBody extends React.Component {
               <InputLabel name="MaterialType" className="InputLabel">Material Type:</InputLabel>
             </div>
             <div className="col-md-9">
-              <Select id="MaterialType" value={this.state.materialSelect} onChange={this.setMaterialSelect} disabled={this.state.value}>
+              <Select id="MaterialType" value={this.state.materialSelect} onChange={this.setMaterialSelect} disabled={this.state.value} >
                 <MenuItem value='0' disabled>Select Material Type</MenuItem>
                 <MenuItem value='1'>Choose 1</MenuItem>
                 <MenuItem value='2'>Choose 2</MenuItem>
@@ -131,7 +133,7 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-10">
-              <TextField id="PartName" disabled={this.state.value} value={this.state.partNameValue} onChange={this.setPartNameValue} />
+              <TextField id="PartName" disabled={this.state.value} value={this.state.partNameValue} onChange={this.setPartNameValue} autoComplete='OFF' />
 
             </div>
           </div>
@@ -144,11 +146,11 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-8">
-              <TextField id="standard-basic" value={this.state.partNumberValue} disabled={this.state.value} onChange={this.setPartNumberValue} />
+              <TextField value={this.state.partNumberValue} disabled={this.state.value} onChange={this.setPartNumberValue} autoComplete='OFF' />
 
             </div>
             <div className="col-md-2">
-              <Checkbox disabled={this.state.value} checked={this.state.allowBomValue} onChange={this.setAllowBomValue} />
+              <Checkbox disabled={this.state.value} checked={this.state.allowBomValue} onChange={this.setAllowBomValue} color="primary" />
               <InputLabel name="Label4" style={{display:"inline-block"}} className="InputLabel" >Allow Bom</InputLabel>
 
             </div>
@@ -162,7 +164,7 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-10">
-              <TextField id="standard-basic" value={this.state.ppcNameValue} disabled={this.state.value} onChange={this.setPpcNameValue} />
+              <TextField id="standard-basic" value={this.state.ppcNameValue} disabled={this.state.value} onChange={this.setPpcNameValue}  autoComplete='OFF' />
 
             </div>
           </div>
@@ -175,7 +177,7 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-6">
-              <TextField id="standard-basic" value={this.state.descriptionValue} disabled={this.state.value} onChange={this.setDescriptionValue} />
+              <TextField id="standard-basic" value={this.state.descriptionValue} disabled={this.state.value} onChange={this.setDescriptionValue} autoComplete='OFF' />
 
             </div>
             <div className="col-md-4">
@@ -205,7 +207,7 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-4">
-              <TextField id="standard-basic" value={this.state.stockValue} disabled={this.state.value} onChange={this.setStockValue} />
+              <TextField value={this.state.stockValue} disabled={this.state.value} onChange={this.setStockValue} autoComplete='OFF' />
 
             </div>
             <div className="col-md-2" >
@@ -231,7 +233,7 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-4">
-              <TextField id="standard-basic" value={this.state.hsnValue} disabled={this.state.value} onChange={this.setHsnValue} />
+              <TextField id="standard-basic" value={this.state.hsnValue} disabled={this.state.value} onChange={this.setHsnValue} autoComplete='OFF' />
 
             </div>
             <div className="col-md-2" id="label011">
@@ -239,7 +241,7 @@ class ModaleBody extends React.Component {
 
             </div>
             <div className="col-md-4">
-              <TextField id="standard-basic" value={this.state.taxValue} disabled={this.state.value} onChange={this.setTaxValue} />
+              <TextField id="standard-basic" value={this.state.taxValue} disabled={this.state.value} onChange={this.setTaxValue} autoComplete='OFF' />
 
             </div>
           </div>
@@ -251,10 +253,10 @@ class ModaleBody extends React.Component {
               <button className="btn btn-primary" style={{ width: "100%" }} type='button' onClick={this.disableField}>{this.state.value ? "Add" : "Remove"}</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-success" style={{ width: "100%" }} type='button'>Edit</button>
+              <button className="btn btn-success" style={{ width: "100%" }} type='button' onClick={() => alert("You Clicked on Edit")}>Edit</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-success" style={{ width: "100%" }} type='button' onClick={() => alert("Data Saved Successfully")}>Save</button>
+              <button className="btn btn-success" style={{ width: "100%" }} type='button' disabled={this.state.value} onClick={() => alert("Data Saved Successfully")}>Save</button>
             </div>
             <div className="col-md-2">
               <button className="btn btn-info" style={{ width: "100%" }} type='button'>Find</button>
@@ -263,7 +265,7 @@ class ModaleBody extends React.Component {
               <button className="btn btn-danger" style={{ width: "100%" }} type='button'>Delete</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-warning" style={{ width: "100%" }} type='button'>Exit</button>
+              <button className="btn btn-warning" style={{ width: "100%" }} type='button' onClick={this.handleExit}>Exit</button>
             </div>
           </div>
         </form>

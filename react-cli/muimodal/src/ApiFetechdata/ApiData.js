@@ -17,7 +17,7 @@ class ApiData extends React.Component {
     return (
       <>
       <ul>
-        {this.state.data.map(p => <li>{p}</li>)}
+        {this.state.data.map((p,index) => <li key={index}>{p}</li>)}
       </ul>
       </>
     )
