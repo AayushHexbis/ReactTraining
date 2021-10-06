@@ -7,26 +7,18 @@ class ApiData extends React.Component {
     }
 
   componentDidMount(){
-    axios.get('http://localhost:8080/Db.Php',this.state.headers)
+    axios.get('http://localhost:8080/Db.Php')
     .then(resp =>{ this.setState({data:resp.data});
-    console.log(this.state.data);
+    console.log(this.state);
   })
   }
-
-  // state = {
-  //   getting: []
-  // }
-  // componentDidMount() {
-  //   axios.get('https://jsonplaceholder.typicode.com/posts').then(res => {
-  //     this.setState({ getting: res.data });
-  //     console.log(this.state)
-  //   })
-  // }
-
 
   render() {
     return (
       <>
+      <ul>
+        {this.state.data.map(p => <li>{p}</li>)}
+      </ul>
       </>
     )
   }
