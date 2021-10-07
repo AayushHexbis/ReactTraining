@@ -7,17 +7,20 @@ class ApiData extends React.Component {
     }
 
   componentDidMount(){
-    axios.get('http://localhost:8080/Db.Php')
+    axios.get('http://localhost:8080/Connection.Php')
     .then(resp =>{ this.setState({data:resp.data});
-    console.log(this.state);
+    console.log(this.state.data);
   })
   }
 
   render() {
+    
     return (
       <>
+      
       <ul>
-        {this.state.data.map((p,index) => <li key={index}>{p}</li>)}
+        {/* {this.state.data.map((p,index) => <li key={index}>{p}</li>)} */}
+        {this.state.data.map((p,index) => <li key={index}>{p.part_name}</li>)}
       </ul>
       </>
     )

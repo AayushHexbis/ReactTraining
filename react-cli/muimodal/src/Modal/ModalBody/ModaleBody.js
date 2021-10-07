@@ -2,13 +2,15 @@ import React from 'react'
 import "../Modale.css"
 import { TextField, InputLabel, Select, MenuItem, Checkbox } from '@material-ui/core';
 
+// import ApiData from '../../ApiFetechdata/ApiData'
+
 class ModaleBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: true,
       materialSelect: 0,     // initialized a value to be accessed and passed to ModaleTextBody
-      partNameValue: "",
+      partNameValue: this.props.data[0].part_name,
       partNumberValue: "",
       ppcNameValue: "",
       descriptionValue: "",
@@ -20,6 +22,7 @@ class ModaleBody extends React.Component {
       taxValue: "",
       exitShow: true
     }
+
     this.getValueFromChild = this.getValueFromChild.bind(this)
     this.handleChange = this.handleChange.bind(this);
     this.disableField = this.disableField.bind(this);
@@ -50,7 +53,7 @@ class ModaleBody extends React.Component {
     this.setState({
       value: !this.state.value,
       materialSelect: 0,
-      partNameValue: "",
+      partNameValue: this.props.data[0].part_name,
       partNumberValue: "",
       ppcNameValue: "",
       descriptionValue: "",

@@ -4,15 +4,24 @@ import ModaleBody from './ModalBody/ModaleBody'
 import ModaleHeader from './ModalHeader/ModaleHeader'
 import { Modal, Button } from 'react-bootstrap'
 import ModaleFooter from './ModalFooter/ModaleFooter'
+import axios from 'axios'
 
 
 class Modale extends React.Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: false,
+      data: []
     }
     this.sendShow = this.sendShow.bind(this)
+  }
+
+  componentDidMount(){
+    axios.get('http://localhost:8080/Connection.Php')
+    .then(resp =>{ this.setState({data:resp.data});
+    console.log(this.state.data);
+  })
   }
 
   handleClick() {
@@ -33,7 +42,7 @@ class Modale extends React.Component {
             <ModaleHeader/>
           </Modal.Header>
           <Modal.Body>
-            <ModaleBody fun={this.sendShow}/>
+            <ModaleBody fun={this.sendShow} data={this.state.data}/>
             {/* <ModaleTestInput/> */}
           </Modal.Body>
           <Modal.Footer id="modal-footer">
