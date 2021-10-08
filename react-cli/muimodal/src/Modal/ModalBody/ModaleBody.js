@@ -1,6 +1,7 @@
 import React from 'react'
 import "../Modale.css"
 import { TextField, InputLabel, Select, MenuItem, Checkbox } from '@material-ui/core';
+import { Modal } from 'bootstrap';
 
 // import ApiData from '../../ApiFetechdata/ApiData'
 
@@ -53,7 +54,7 @@ class ModaleBody extends React.Component {
     this.setState({
       value: !this.state.value,
       materialSelect: 0,
-      partNameValue: this.props.data[0].part_name,
+      partNameValue: this.props.data[1].part_name,
       partNumberValue: "",
       ppcNameValue: "",
       descriptionValue: "",
@@ -117,10 +118,11 @@ handleExit(e){
             <div className="col-md-9">
               <Select id="MaterialType" value={this.state.materialSelect} onChange={this.setMaterialSelect} disabled={this.state.value} >
                 <MenuItem value='0' disabled>Select Material Type</MenuItem>
-                <MenuItem value='1'>Choose 1</MenuItem>
+                {this.props.data.map((post) => <MenuItem key={post.part_id} value={post.part_name}>{post.part_name}</MenuItem>)}
+                {/* <MenuItem value='1'>Choose 1</MenuItem>
                 <MenuItem value='2'>Choose 2</MenuItem>
                 <MenuItem value='3'>Choose 3</MenuItem>
-                <MenuItem value='4'>Choose 4</MenuItem>
+                <MenuItem value='4'>Choose 4</MenuItem> */}
               </Select>
             </div>
             <div className="col-md-1">

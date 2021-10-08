@@ -17,32 +17,36 @@ class Modale extends React.Component {
     this.sendShow = this.sendShow.bind(this)
   }
 
-  componentDidMount(){
-    axios.get('http://localhost:8080/Connection.Php')
-    .then(resp =>{ this.setState({data:resp.data});
-    console.log(this.state.data);
-  })
+  componentDidMount() {
+    axios.get('http://localhost:8080/Connection.php')
+      .then(response => {
+        this.setState({ data: response.data })
+        console.log(this.state.data)
+      }
+      )
+
   }
 
   handleClick() {
     this.setState({ show: !this.state.show })
   }
 
-  sendShow(e){
-    this.setState({show: !e})
+  sendShow(e) {
+    this.setState({ show: !e })
   }
 
   render() {
     return (
       <>
+      <ul>{this.state.data.map((post,index) => <li key={index}>{post.part_name}</li>)}</ul>
         <Button onClick={() => this.handleClick()} id="clci">Click Me</Button>
-        <Modal show={this.state.show} onHide={() => this.handleClick() } backdrop="static" keyboard={false} id="myid">
-
+        <Modal show={this.state.show} onHide={() => this.handleClick()} backdrop="static" keyboard={false} id="myid">
+      
           <Modal.Header closeButton>
-            <ModaleHeader/>
+            <ModaleHeader />
           </Modal.Header>
           <Modal.Body>
-            <ModaleBody fun={this.sendShow} data={this.state.data}/>
+            <ModaleBody fun={this.sendShow} data={this.state.data} nestedShow={this.state.show}/>
             {/* <ModaleTestInput/> */}
           </Modal.Body>
           <Modal.Footer id="modal-footer">
