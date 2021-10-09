@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Modale.css"
 import { TextField, InputLabel, Select, MenuItem, Checkbox } from '@material-ui/core';
-import { Modal } from 'bootstrap';
+import { Modal } from 'react-bootstrap';
 
 // import ApiData from '../../ApiFetechdata/ApiData'
 
@@ -11,7 +11,7 @@ class ModaleBody extends React.Component {
     this.state = {
       value: true,
       materialSelect: 0,     // initialized a value to be accessed and passed to ModaleTextBody
-      partNameValue: this.props.data[0].part_name,
+      partNameValue: "",
       partNumberValue: "",
       ppcNameValue: "",
       descriptionValue: "",
@@ -21,7 +21,8 @@ class ModaleBody extends React.Component {
       consValue: 0,
       hsnValue: "",
       taxValue: "",
-      exitShow: true
+      exitShow: true,
+      showNestedModal: false
     }
 
     this.getValueFromChild = this.getValueFromChild.bind(this)
@@ -39,7 +40,10 @@ class ModaleBody extends React.Component {
     this.setHsnValue = this.setHsnValue.bind(this);
     this.setTaxValue = this.setTaxValue.bind(this);
     this.handleExit = this.handleExit.bind(this);
+    this.nestedModal = this.nestedModal.bind(this);
   }
+
+
 
   handleChange(event) {
     this.setState({ inputValue: event.target.value });
@@ -54,7 +58,7 @@ class ModaleBody extends React.Component {
     this.setState({
       value: !this.state.value,
       materialSelect: 0,
-      partNameValue: this.props.data[1].part_name,
+      partNameValue: "",
       partNumberValue: "",
       ppcNameValue: "",
       descriptionValue: "",
@@ -65,6 +69,10 @@ class ModaleBody extends React.Component {
       hsnValue: "",
       taxValue: ""
     })
+  }
+
+  nestedModal() {
+    this.setState({ showNestedModal: !this.state.showNestedModal });
   }
 
   setMaterialSelect(e) {
@@ -100,14 +108,19 @@ class ModaleBody extends React.Component {
   setTaxValue(e) {
     this.setState({ taxValue: e.target.value })
   }
-handleExit(e){
-  this.setState({exitShow: !this.state.exitShow})
-  this.props.fun(this.state.exitShow)
-}
+  handleExit(e) {
+    this.setState({ exitShow: !this.state.exitShow })
+    this.props.fun(this.state.exitShow)
+  }
 
   render() {
     return (
       <>
+        <Modal style={{backgroundColor:"rgba(0,0,0,0.6)"}} show={this.state.showNestedModal} onHide={() => this.nestedModal()}>
+          <Modal.Header>I am Header of dbl modal</Modal.Header>
+          <Modal.Body>I am Body of dbl</Modal.Body>
+          <Modal.Footer>I am Footer of dbl</Modal.Footer>
+        </Modal>
         <form action="">
           {/* Material Type Field */}
 
@@ -118,7 +131,7 @@ handleExit(e){
             <div className="col-md-9">
               <Select id="MaterialType" value={this.state.materialSelect} onChange={this.setMaterialSelect} disabled={this.state.value} >
                 <MenuItem value='0' disabled>Select Material Type</MenuItem>
-                {this.props.data.map((post) => <MenuItem key={post.part_id} value={post.part_name}>{post.part_name}</MenuItem>)}
+                {this.props.data.map((type, index) => <MenuItem key={index} value={type.part_name}>{type.part_name}</MenuItem>)}
                 {/* <MenuItem value='1'>Choose 1</MenuItem>
                 <MenuItem value='2'>Choose 2</MenuItem>
                 <MenuItem value='3'>Choose 3</MenuItem>
@@ -156,7 +169,7 @@ handleExit(e){
             </div>
             <div className="col-md-2">
               <Checkbox disabled={this.state.value} checked={this.state.allowBomValue} onChange={this.setAllowBomValue} color="primary" />
-              <InputLabel name="Label4" style={{display:"inline-block"}} className="InputLabel" >Allow Bom</InputLabel>
+              <InputLabel name="Label4" style={{ display: "inline-block" }} className="InputLabel" >Allow Bom</InputLabel>
 
             </div>
           </div>
@@ -169,7 +182,7 @@ handleExit(e){
 
             </div>
             <div className="col-md-10">
-              <TextField id="standard-basic" value={this.state.ppcNameValue} disabled={this.state.value} onChange={this.setPpcNameValue}  autoComplete='OFF' />
+              <TextField id="standard-basic" value={this.state.ppcNameValue} disabled={this.state.value} onChange={this.setPpcNameValue} autoComplete='OFF' />
 
             </div>
           </div>
@@ -193,7 +206,7 @@ handleExit(e){
                 </div>
                 <div className="col-md-9">
                   <Select id="standard-basic" value={this.state.unitValue} disabled={this.state.value} onChange={this.setUnitValue}>
-                  <MenuItem value='0' disabled>Select Unit</MenuItem>
+                    <MenuItem value='0' disabled>Select Unit</MenuItem>
                     <MenuItem value='1' selected>Choose 1</MenuItem>
                     <MenuItem value='2'>Choose 2</MenuItem>
                     <MenuItem value='3'>Choose 3</MenuItem>
@@ -221,7 +234,7 @@ handleExit(e){
             </div>
             <div className="col-md-4">
               <Select id="standard-basic" value={this.state.consValue} disabled={this.state.value} onChange={this.setConsValue}>
-              <MenuItem value='0' disabled>Select ConsUnit</MenuItem>
+                <MenuItem value='0' disabled>Select ConsUnit</MenuItem>
                 <MenuItem value='1'>Choose 1</MenuItem>
                 <MenuItem value='2'>Choose 2</MenuItem>
                 <MenuItem value='3'>Choose 3</MenuItem>
@@ -264,7 +277,7 @@ handleExit(e){
               <button className="btn btn-success" style={{ width: "100%" }} type='button' disabled={this.state.value} onClick={() => alert("Data Saved Successfully")}>Save</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-info" style={{ width: "100%" }} type='button'>Find</button>
+              <button className="btn btn-info" style={{ width: "100%" }} type='button' onClick={this.nestedModal}>Find</button>
             </div>
             <div className="col-md-2">
               <button className="btn btn-danger" style={{ width: "100%" }} type='button'>Delete</button>

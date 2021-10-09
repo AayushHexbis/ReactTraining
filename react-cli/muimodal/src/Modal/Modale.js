@@ -38,10 +38,8 @@ class Modale extends React.Component {
   render() {
     return (
       <>
-      <ul>{this.state.data.map((post,index) => <li key={index}>{post.part_name}</li>)}</ul>
         <Button onClick={() => this.handleClick()} id="clci">Click Me</Button>
         <Modal show={this.state.show} onHide={() => this.handleClick()} backdrop="static" keyboard={false} id="myid">
-      
           <Modal.Header closeButton>
             <ModaleHeader />
           </Modal.Header>
