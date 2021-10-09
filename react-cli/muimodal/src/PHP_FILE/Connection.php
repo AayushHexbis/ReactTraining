@@ -9,7 +9,7 @@ sqlsrv_configure("WarningsReturnAsErrors", 0);
 
 $options = array("UID" => $username, "PWD" => $password, "Database" => $database, "CharacterSet" => "UTF-8");		// Sending Options
 
-$str = 'SELECT * FROM test_table1';  // Using Stored Procedure Value
+$str = 'getpartname';  // Using Stored Procedure Value
 
 $localserver = sqlsrv_connect($host, $options) or die(print_r(sqlsrv_errors(), true)); 	// Establishing Connection
 
